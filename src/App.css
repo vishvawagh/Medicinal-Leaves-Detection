@@ -1,0 +1,10 @@
+body {
+    background-color: #f0f0f0; /* ✅ Light gray color */
+    background-size: cover; /* Cover the entire viewport */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-attachment: fixed; /* Ensure the background stays fixed during scrolling */
+    background-position: center; /* Center the background image */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    height: 100%; /* Ensure the body takes full height */
+}

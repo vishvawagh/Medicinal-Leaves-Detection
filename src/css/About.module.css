@@ -1,0 +1,59 @@
+.container {
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  max-width: 70%;
+  max-height: 90%;
+  text-align: center;
+ text-align: left;
+  margin-bottom: 70px;
+  margin: 0 auto;
+  font-family: serif;
+  
+}
+
+.container h2 {
+  color: #ffffff;
+  margin-bottom: 20px;
+  margin-top: 50px;
+  font-family: serif;
+}
+
+.container plant-image {
+  justify-content: center;
+  max-height: 400px;
+  max-width: 600px; /* Adjust as needed */
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.container p {
+  font-size: larger;
+  color: #ffffff;
+  line-height: 1.6;
+  text-align: left;
+  margin-bottom: 20px;
+  font-family: serif;
+}
+
+.container ul {
+  text-align: left;
+  list-style: disc inside;
+  color: #ffffff;
+  padding-left: 20px;
+  font-family: serif;
+}
+
+.container li {
+  margin-bottom: 10px;
+  font-family: serif;
+  font-size: large;
+}
+
+.container h4 {
+  color: #ffffff;
+  margin-bottom: 15px;
+  text-align: left;
+  font-family: serif;
+}
