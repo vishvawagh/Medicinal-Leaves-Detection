@@ -47,7 +47,7 @@ function Home() {
 
   const fetchFilteredPlants = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/search", {
+      const res = await axios.get("http://172.17.0.2:5000/search", {
         params: { name: search, usage: usageFilter },
       });
       setFilteredPlants(res.data);
@@ -58,7 +58,7 @@ function Home() {
 
   const fetchVotes = async (plantName) => {
     try {
-      const res = await axios.get(`http://localhost:5000/votes/${encodeURIComponent(plantName)}`);
+      const res = await axios.get(`http://172.17.0.2:5000/votes/${encodeURIComponent(plantName)}`);
       setVotes(res.data);
     } catch (err) {
       console.error("Error fetching votes:", err);
@@ -69,7 +69,7 @@ function Home() {
     if (!plantInfo?.Name) return;
 
     try {
-      await axios.post("http://localhost:5000/vote", {
+      await axios.post("http://172.17.0.2:5000/vote", {
         plant_name: plantInfo.Name,
         type: type,
       });
@@ -91,7 +91,7 @@ function Home() {
     formData.append("uploadType", uploadType);
 
     try {
-      const response = await axios.post("http://localhost:5000/predict", formData, {
+      const response = await axios.post("http://172.17.0.2:5000/predict", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
@@ -101,7 +101,7 @@ function Home() {
         fetchVotes(response.data.Name);
 
         // Save prediction to history
-        await axios.post("http://localhost:5000/update-history", response.data);
+        await axios.post("http://172.17.0.2:5000/update-history", response.data);
 
         // Refresh frontend history
         fetchHistory();
@@ -118,7 +118,7 @@ function Home() {
 
   const fetchHistory = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/history");
+      const res = await axios.get("http://172.17.0.2:5000/history");
       if (Array.isArray(res.data)) {
         setHistory(res.data);
       } else {
@@ -132,7 +132,7 @@ function Home() {
 
   const clearHistory = async () => {
     try {
-      await axios.post("http://localhost:5000/clear-history");
+      await axios.post("http://172.17.0.2:5000/clear-history");
       setHistory([]);
     } catch (err) {
       console.error("Failed to clear history:", err);
@@ -173,7 +173,7 @@ function Home() {
     setChatInput("");
 
     try {
-      const res = await axios.post("http://localhost:5000/chat", { message });
+      const res = await axios.post("http://172.17.0.2:5000/chat", { message });
       setChatMessages((prev) => [...prev, { from: "bot", text: res.data.reply || "No response." }]);
     } catch (err) {
       console.error("Chat error:", err);
