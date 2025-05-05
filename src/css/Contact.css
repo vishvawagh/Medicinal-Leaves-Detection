@@ -1,0 +1,105 @@
+/* Base reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: linear-gradient(135deg, #1a1a1a, #2e2e2e); /* Dark gradient */
+  font-family: 'Segoe UI', sans-serif;
+  color: #ffffff;
+}
+
+/* Container with glass effect */
+.contact-glass-container {
+  width: 90%;
+  max-width: 600px;
+  margin: 80px auto;
+  padding: 35px 25px;
+  border-radius: 20px;
+  background: rgba(26, 26, 26, 0.9);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Form */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact-form h1 {
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 10px;
+  color: #e63946;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.contact-form label {
+  font-weight: 500;
+  color: #ffffff;
+  margin-left: 5px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 1rem;
+  border: none;
+  outline: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.25), inset -2px -2px 4px rgba(255, 255, 255, 0.05);
+  transition: 0.3s ease-in-out;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 10px rgba(230, 57, 70, 0.5);
+}
+
+/* Button */
+.contact-form button {
+  padding: 14px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #e63946, #a4161a);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease;
+  box-shadow: 0 4px 14px rgba(230, 57, 70, 0.4);
+}
+
+.contact-form button:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 18px rgba(230, 57, 70, 0.6);
+}
+
+/* Mobile Responsive */
+@media (max-width: 500px) {
+  .contact-glass-container {
+    padding: 25px 15px;
+  }
+
+  .contact-form h1 {
+    font-size: 24px;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 0.95rem;
+  }
+
+  .contact-form button {
+    font-size: 0.95rem;
+  }
+}

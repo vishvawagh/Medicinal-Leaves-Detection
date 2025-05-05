@@ -1,0 +1,90 @@
+/* General navbar styling */
+.navbar {
+  justify-content: space-between;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(90deg, #000000 0%, #1a1a1a 100%);
+  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
+  padding: 6px 16px; /* Reduced padding for shorter height */
+  transition: background-color 0.3s ease;
+  z-index: 999;
+}
+
+
+/* Brand */
+.navbar-brand {
+  font-size: 1.7rem;
+  font-weight: bold;
+  color: #ff3d3d !important;
+  letter-spacing: 2px;
+  transition: color 0.3s ease;
+}
+
+.navbar-brand:hover {
+  color: #ff7b7b !important;
+}
+
+/* Nav links */
+.navbar-nav {
+  flex: 1;
+  justify-content: center;
+}
+
+.nav-item {
+  margin: 0 20px;
+}
+
+.nav-link {
+  color: #fff !important;
+  font-size: 1.1rem;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-link::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #ff4c4c;
+  transition: width 0.3s;
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+}
+
+.nav-link:hover {
+  color: #ff4c4c !important;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Sign-in link and button */
+.sign-in-link {
+  margin-left: auto;
+}
+
+.sign-in-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #ff4c4c, #ff0000);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: bold;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 0 12px rgba(255, 0, 0, 0.4);
+}
+
+.sign-in-button:hover {
+  background: #fff;
+  color: #ff0000;
+  transform: scale(1.05);
+  box-shadow: 0 0 18px rgba(255, 0, 0, 0.6);
+}

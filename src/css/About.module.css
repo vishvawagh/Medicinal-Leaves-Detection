@@ -1,0 +1,58 @@
+.container {
+  backdrop-filter: blur(10px);
+  background: rgba(26, 26, 26, 0.95); /* near black with opacity */
+  border: 1px solid #444;
+  border-radius: 16px;
+  padding: 30px;
+  max-width: 900px;
+  margin: 50px auto;
+  color: #ffffff;
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+/* Headings */
+h2 {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #e63946;
+}
+
+h4 {
+  margin-top: 30px;
+  font-size: 1.4rem;
+  color: #ffffff;
+}
+
+/* Paragraphs */
+p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  text-align: justify;
+  /* color: #d4c2c2; */
+}
+
+/* Lists */
+ul {
+  list-style: disc inside;
+  margin-bottom: 20px;
+  font-size: 1.05rem;
+  color: #cccccc;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+/* Plant Image */
+.plantImage {
+  display: block;
+  margin: 30px auto;
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  border: 2px solid #e63946;
+}
