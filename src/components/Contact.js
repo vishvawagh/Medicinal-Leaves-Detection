@@ -24,6 +24,8 @@ const database = getDatabase(app);
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [viewAlert, setViewAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,50 +37,31 @@ const ContactForm = () => {
     try {
       const contactRef = ref(database, 'contacts');
       await push(contactRef, formData);
-      toast.success("✅ Form Submitted Successfully");
-      setFormData({ name: '', email: '', message: '' }); // Clear form
+      setAlertMessage("Form Submitted Successfully");
+      setViewAlert(true);
+      setTimeout(() => setViewAlert(false), 3000);
     } catch (error) {
       console.error('Error:', error);
-      toast.error("❌ Something went wrong. Please try again.");
+      setAlertMessage("Some error occurred");
+      setViewAlert(true);
+      setTimeout(() => setViewAlert(false), 3000);
     }
   };
 
   return (
     <>
-      <ToastContainer position="top-center" autoClose={3000} />
+      <Alert show={viewAlert} type="success" message={alertMessage} />
       <div className="contact-glass-container">
         <form className="contact-form" onSubmit={handleSubmit}>
           <h1>Contact Us</h1>
-
           <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
+          <input type="text" name="name" id="name" value={formData.name} onChange={handleChange} required />
 
           <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
+          <input type="email" name="email" id="email" value={formData.email} onChange={handleChange} required />
 
           <label htmlFor="message">Message</label>
-          <textarea
-            name="message"
-            id="message"
-            rows="4"
-            value={formData.message}
-            onChange={handleChange}
-            required
-          />
+          <textarea name="message" id="message" rows="4" value={formData.message} onChange={handleChange} required />
 
           <button type="submit">Send Message</button>
         </form>
