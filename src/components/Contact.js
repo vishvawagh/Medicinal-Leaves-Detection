@@ -6,13 +6,14 @@ import { getDatabase, ref, push } from 'firebase/database';
 import { initializeApp } from 'firebase/app';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCkW5aNsQwfcl9a6QZTVG1GKpW6FfW8CPI",
-  authDomain: "student-management-f793a.firebaseapp.com",
-  projectId: "student-management-f793a",
-  storageBucket: "student-management-f793a.appspot.com",
-  messagingSenderId: "820420097518",
-  appId: "1:820420097518:web:9a3ff0cb8c5b3d7fc24aff",
-  measurementId: "G-38FTZ6ZQ53"
+  apiKey: "AIzaSyDhbBQojHg-bhEITLhB_MLmS-hGCH6bGqs",
+  authDomain: "job-listing-6ef2e.firebaseapp.com",
+  databaseURL: "https://job-listing-6ef2e-default-rtdb.firebaseio.com",
+  projectId: "job-listing-6ef2e",
+  storageBucket: "job-listing-6ef2e.firebasestorage.app",
+  messagingSenderId: "2793307618",
+  appId: "1:2793307618:web:b575c378405cb331510dbb",
+  measurementId: "G-89350S7EM2"
 };
 
 const app = initializeApp(firebaseConfig);
