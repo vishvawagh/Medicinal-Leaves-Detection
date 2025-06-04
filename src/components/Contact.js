@@ -5,16 +5,24 @@ import Alert from './Alert';
 import { getDatabase, ref, push } from 'firebase/database';
 import { initializeApp } from 'firebase/app';
 
+// const firebaseConfig = {
+//   apiKey: "AIzaSyCkW5aNsQwfcl9a6QZTVG1GKpW6FfW8CPI",
+//   authDomain: "student-management-f793a.firebaseapp.com",
+//   projectId: "student-management-f793a",
+//   storageBucket: "student-management-f793a.appspot.com",
+//   messagingSenderId: "820420097518",
+//   appId: "1:820420097518:web:9a3ff0cb8c5b3d7fc24aff",
+//   measurementId: "G-38FTZ6ZQ53"
+// };
 const firebaseConfig = {
-  apiKey: "AIzaSyCkW5aNsQwfcl9a6QZTVG1GKpW6FfW8CPI",
-  authDomain: "student-management-f793a.firebaseapp.com",
-  projectId: "student-management-f793a",
-  storageBucket: "student-management-f793a.appspot.com",
-  messagingSenderId: "820420097518",
-  appId: "1:820420097518:web:9a3ff0cb8c5b3d7fc24aff",
-  measurementId: "G-38FTZ6ZQ53"
+  apiKey: "AIzaSyDdeuAJui9LfytbNdnv1lHrnRHshxVPCGk",
+  authDomain: "tasty-temptations-62a09.firebaseapp.com",
+  projectId: "tasty-temptations-62a09",
+  storageBucket: "tasty-temptations-62a09.firebasestorage.app",
+  messagingSenderId: "308979770967",
+  appId: "1:308979770967:web:f28d1be528b84c33692512",
+  measurementId: "G-K0Y6T20J4Q"
 };
-
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
