@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import '../css/Contact.css';
-import Alert from './Alert';
 
 import { initializeApp, getApps } from 'firebase/app';
 import { getDatabase, ref, push } from 'firebase/database';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // ✅ Firebase config
 const firebaseConfig = {
@@ -16,14 +18,12 @@ const firebaseConfig = {
   measurementId: "G-QGNP72J0QN"
 };
 
-// ✅ Prevent "Firebase App already exists" error
+// ✅ Prevent duplicate Firebase init
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 const database = getDatabase(app);
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [viewAlert, setViewAlert] = useState(false);
-  const [alertMessage, setAlertMessage] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,31 +35,50 @@ const ContactForm = () => {
     try {
       const contactRef = ref(database, 'contacts');
       await push(contactRef, formData);
-      setAlertMessage("Form Submitted Successfully");
-      setViewAlert(true);
-      setTimeout(() => setViewAlert(false), 3000);
+      toast.success("✅ Form Submitted Successfully");
+      setFormData({ name: '', email: '', message: '' }); // Clear form
     } catch (error) {
       console.error('Error:', error);
-      setAlertMessage("Some error occurred");
-      setViewAlert(true);
-      setTimeout(() => setViewAlert(false), 3000);
+      toast.error("❌ Something went wrong. Please try again.");
     }
   };
 
   return (
     <>
-      <Alert show={viewAlert} type="success" message={alertMessage} />
+      <ToastContainer position="top-center" autoClose={3000} />
       <div className="contact-glass-container">
         <form className="contact-form" onSubmit={handleSubmit}>
           <h1>Contact Us</h1>
+
           <label htmlFor="name">Name</label>
-          <input type="text" name="name" id="name" value={formData.name} onChange={handleChange} required />
+          <input
+            type="text"
+            name="name"
+            id="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
 
           <label htmlFor="email">Email</label>
-          <input type="email" name="email" id="email" value={formData.email} onChange={handleChange} required />
+          <input
+            type="email"
+            name="email"
+            id="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
 
           <label htmlFor="message">Message</label>
-          <textarea name="message" id="message" rows="4" value={formData.message} onChange={handleChange} required />
+          <textarea
+            name="message"
+            id="message"
+            rows="4"
+            value={formData.message}
+            onChange={handleChange}
+            required
+          />
 
           <button type="submit">Send Message</button>
         </form>
