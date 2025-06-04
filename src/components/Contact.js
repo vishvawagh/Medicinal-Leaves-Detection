@@ -4,17 +4,15 @@ import Alert from './Alert';
 
 import { getDatabase, ref, push } from 'firebase/database';
 import { initializeApp } from 'firebase/app';
-
 const firebaseConfig = {
-  apiKey: "AIzaSyCkW5aNsQwfcl9a6QZTVG1GKpW6FfW8CPI",
-  authDomain: "student-management-f793a.firebaseapp.com",
-  projectId: "student-management-f793a",
-  storageBucket: "student-management-f793a.appspot.com",
-  messagingSenderId: "820420097518",
-  appId: "1:820420097518:web:9a3ff0cb8c5b3d7fc24aff",
-  measurementId: "G-38FTZ6ZQ53"
+  apiKey: "AIzaSyAoBfqBp3GKkGnN3AwaVEW-4xN4BzduIkE",
+  authDomain: "medicinal-plant-detectio-99a9c.firebaseapp.com",
+  projectId: "medicinal-plant-detectio-99a9c",
+  storageBucket: "medicinal-plant-detectio-99a9c.firebasestorage.app",
+  messagingSenderId: "191623698549",
+  appId: "1:191623698549:web:9ea98c4b0f8c58f486c03c",
+  measurementId: "G-QGNP72J0QN"
 };
-
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
