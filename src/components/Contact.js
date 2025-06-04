@@ -20,7 +20,7 @@ const firebaseConfig = {
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 const database = getDatabase(app);
 
-const Contact = () => {
+const ContactForm = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [viewAlert, setViewAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
@@ -37,7 +37,6 @@ const Contact = () => {
       await push(contactRef, formData);
       setAlertMessage("Form Submitted Successfully");
       setViewAlert(true);
-      setFormData({ name: '', email: '', message: '' }); // Clear form
       setTimeout(() => setViewAlert(false), 3000);
     } catch (error) {
       console.error('Error:', error);
@@ -53,36 +52,14 @@ const Contact = () => {
       <div className="contact-glass-container">
         <form className="contact-form" onSubmit={handleSubmit}>
           <h1>Contact Us</h1>
-
           <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
+          <input type="text" name="name" id="name" value={formData.name} onChange={handleChange} required />
 
           <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
+          <input type="email" name="email" id="email" value={formData.email} onChange={handleChange} required />
 
           <label htmlFor="message">Message</label>
-          <textarea
-            name="message"
-            id="message"
-            rows="4"
-            value={formData.message}
-            onChange={handleChange}
-            required
-          />
+          <textarea name="message" id="message" rows="4" value={formData.message} onChange={handleChange} required />
 
           <button type="submit">Send Message</button>
         </form>
@@ -91,4 +68,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default ContactForm;
