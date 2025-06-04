@@ -4,10 +4,7 @@
   margin: 0;
   padding: 0;
 }
-/* Optional: Ensure z-index for visibility */
-.Toastify__toast-container {
-  z-index: 9999;
-}
+
 
 body {
   background: linear-gradient(135deg, #1a1a1a, #2e2e2e); /* Dark gradient */
