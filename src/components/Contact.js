@@ -24,63 +24,49 @@ const database = getDatabase(app);
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [viewAlert, setViewAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
 
   const handleChange = (e) => {
-    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const messagesRef = ref(database, 'messages');
-    push(messagesRef, formData)
-      .then(() => {
-        toast.success('Form submitted successfully!');
-        setFormData({ name: '', email: '', message: '' }); // ✅ Clear form data
-      })
-      .catch((error) => {
-        console.error('Error submitting form:', error);
-        toast.error('Submission failed. Try again!');
-      });
-  };
-
-  const handleClear = () => {
-    setFormData({ name: '', email: '', message: '' });
-    toast.info('Form cleared');
+    try {
+      const contactRef = ref(database, 'contacts');
+      await push(contactRef, formData);
+      setAlertMessage("Form Submitted Successfully");
+      setViewAlert(true);
+      setTimeout(() => setViewAlert(false), 3000);
+    } catch (error) {
+      console.error('Error:', error);
+      setAlertMessage("Some error occurred");
+      setViewAlert(true);
+      setTimeout(() => setViewAlert(false), 3000);
+    }
   };
 
   return (
-    <div className="contact-container">
-      <form onSubmit={handleSubmit} className="contact-form">
-        <input
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          placeholder="Name"
-          required
-        />
-        <input
-          name="email"
-          type="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="Email"
-          required
-        />
-        <textarea
-          name="message"
-          value={formData.message}
-          onChange={handleChange}
-          placeholder="Message"
-          required
-        />
-        <button type="submit">Send Message</button>
-        <button type="button" onClick={handleClear} style={{ marginLeft: '10px' }}>
-          Clear
-        </button>
-      </form>
-      <ToastContainer position="top-right" autoClose={3000} />
-    </div>
+    <>
+      <Alert show={viewAlert} type="success" message={alertMessage} />
+      <div className="contact-glass-container">
+        <form className="contact-form" onSubmit={handleSubmit}>
+          <h1>Contact Us</h1>
+          <label htmlFor="name">Name</label>
+          <input type="text" name="name" id="name" value={formData.name} onChange={handleChange} required />
+
+          <label htmlFor="email">Email</label>
+          <input type="email" name="email" id="email" value={formData.email} onChange={handleChange} required />
+
+          <label htmlFor="message">Message</label>
+          <textarea name="message" id="message" rows="4" value={formData.message} onChange={handleChange} required />
+
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+    </>
   );
 };
 
