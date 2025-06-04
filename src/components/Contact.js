@@ -2,21 +2,25 @@ import React, { useState } from 'react';
 import '../css/Contact.css';
 import Alert from './Alert';
 
+import { initializeApp, getApps } from 'firebase/app';
 import { getDatabase, ref, push } from 'firebase/database';
-import { initializeApp } from 'firebase/app';
+
+// ✅ Firebase config
 const firebaseConfig = {
-  apiKey: "AIzaSyAoBfqBp3GKkGnN3AwaVEW-4xN4BzduIkE",
-  authDomain: "medicinal-plant-detectio-99a9c.firebaseapp.com",
-  projectId: "medicinal-plant-detectio-99a9c",
-  storageBucket: "medicinal-plant-detectio-99a9c.firebasestorage.app",
-  messagingSenderId: "191623698549",
-  appId: "1:191623698549:web:9ea98c4b0f8c58f486c03c",
-  measurementId: "G-QGNP72J0QN"
+  apiKey: "AIzaSyCkW5aNsQwfcl9a6QZTVG1GKpW6FfW8CPI",
+  authDomain: "student-management-f793a.firebaseapp.com",
+  projectId: "student-management-f793a",
+  storageBucket: "student-management-f793a.appspot.com",
+  messagingSenderId: "820420097518",
+  appId: "1:820420097518:web:9a3ff0cb8c5b3d7fc24aff",
+  measurementId: "G-38FTZ6ZQ53"
 };
-const app = initializeApp(firebaseConfig);
+
+// ✅ Prevent "Firebase App already exists" error
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 const database = getDatabase(app);
 
-const ContactForm = () => {
+const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [viewAlert, setViewAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
@@ -33,6 +37,7 @@ const ContactForm = () => {
       await push(contactRef, formData);
       setAlertMessage("Form Submitted Successfully");
       setViewAlert(true);
+      setFormData({ name: '', email: '', message: '' }); // Clear form
       setTimeout(() => setViewAlert(false), 3000);
     } catch (error) {
       console.error('Error:', error);
@@ -48,14 +53,36 @@ const ContactForm = () => {
       <div className="contact-glass-container">
         <form className="contact-form" onSubmit={handleSubmit}>
           <h1>Contact Us</h1>
+
           <label htmlFor="name">Name</label>
-          <input type="text" name="name" id="name" value={formData.name} onChange={handleChange} required />
+          <input
+            type="text"
+            name="name"
+            id="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
 
           <label htmlFor="email">Email</label>
-          <input type="email" name="email" id="email" value={formData.email} onChange={handleChange} required />
+          <input
+            type="email"
+            name="email"
+            id="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
 
           <label htmlFor="message">Message</label>
-          <textarea name="message" id="message" rows="4" value={formData.message} onChange={handleChange} required />
+          <textarea
+            name="message"
+            id="message"
+            rows="4"
+            value={formData.message}
+            onChange={handleChange}
+            required
+          />
 
           <button type="submit">Send Message</button>
         </form>
@@ -64,4 +91,4 @@ const ContactForm = () => {
   );
 };
 
-export default ContactForm;
+export default Contact;
