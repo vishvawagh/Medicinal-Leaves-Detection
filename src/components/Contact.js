@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import '../css/Contact.css';
 import Alert from './Alert';
 
+// Import Firebase functions with duplicate initialization check
+import { initializeApp, getApps } from 'firebase/app';
 import { getDatabase, ref, push } from 'firebase/database';
-import { initializeApp } from 'firebase/app';
 
-// ✅ Correct Firebase config with fixed storageBucket domain
 const firebaseConfig = {
   apiKey: "AIzaSyDdeuAJui9LfytbNdnv1lHrnRHshxVPCGk",
   authDomain: "tasty-temptations-62a09.firebaseapp.com",
@@ -16,14 +16,15 @@ const firebaseConfig = {
   measurementId: "G-K0Y6T20J4Q"
 };
 
-const app = initializeApp(firebaseConfig);
+// Initialize Firebase only if it hasn't been initialized already.
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 const database = getDatabase(app);
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [viewAlert, setViewAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false); // UX improvement
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,7 +37,7 @@ const ContactForm = () => {
     try {
       const contactRef = ref(database, 'contacts');
       await push(contactRef, formData);
-      setFormData({ name: '', email: '', message: '' }); // Clear form
+      setFormData({ name: '', email: '', message: '' }); // Reset form
       setAlertMessage("Form Submitted Successfully");
     } catch (error) {
       console.error('Error:', error);
@@ -56,33 +57,33 @@ const ContactForm = () => {
           <h1>Contact Us</h1>
 
           <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
+          <input 
+            type="text" 
+            name="name" 
+            id="name" 
+            value={formData.name} 
+            onChange={handleChange} 
+            required 
           />
 
           <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
+          <input 
+            type="email" 
+            name="email" 
+            id="email" 
+            value={formData.email} 
+            onChange={handleChange} 
+            required 
           />
 
           <label htmlFor="message">Message</label>
-          <textarea
-            name="message"
-            id="message"
-            rows="4"
-            value={formData.message}
-            onChange={handleChange}
-            required
+          <textarea 
+            name="message" 
+            id="message" 
+            rows="4" 
+            value={formData.message} 
+            onChange={handleChange} 
+            required 
           />
 
           <button type="submit" disabled={isSubmitting}>
