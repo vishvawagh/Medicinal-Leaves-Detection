@@ -36,12 +36,17 @@ const ContactForm = () => {
     push(messagesRef, formData)
       .then(() => {
         toast.success('Form submitted successfully!');
-        setFormData({ name: '', email: '', message: '' });
+        setFormData({ name: '', email: '', message: '' }); // ✅ Clear form data
       })
       .catch((error) => {
         console.error('Error submitting form:', error);
         toast.error('Submission failed. Try again!');
       });
+  };
+
+  const handleClear = () => {
+    setFormData({ name: '', email: '', message: '' });
+    toast.info('Form cleared');
   };
 
   return (
@@ -70,6 +75,9 @@ const ContactForm = () => {
           required
         />
         <button type="submit">Send Message</button>
+        <button type="button" onClick={handleClear} style={{ marginLeft: '10px' }}>
+          Clear
+        </button>
       </form>
       <ToastContainer position="top-right" autoClose={3000} />
     </div>
