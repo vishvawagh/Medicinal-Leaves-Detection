@@ -7,7 +7,7 @@ import { getDatabase, ref, push } from 'firebase/database';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-// Firebase config
+// ✅ Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyAoBfqBp3GKkGnN3AwaVEW-4xN4BzduIkE",
   authDomain: "medicinal-plant-detectio-99a9c.firebaseapp.com",
@@ -18,7 +18,7 @@ const firebaseConfig = {
   measurementId: "G-QGNP72J0QN"
 };
 
-// Prevent duplicate Firebase init
+// ✅ Initialize Firebase
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 const database = getDatabase(app);
 
@@ -31,15 +31,22 @@ const ContactForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Submitting", formData);
-    // Simulate success
-    toast.success("Form submitted successfully!");
-    setFormData({ name: '', email: '', message: '' });
+
+    const messagesRef = ref(database, 'messages');
+    push(messagesRef, formData)
+      .then(() => {
+        toast.success('Form submitted successfully!');
+        setFormData({ name: '', email: '', message: '' });
+      })
+      .catch((error) => {
+        console.error('Error submitting form:', error);
+        toast.error('Submission failed. Try again!');
+      });
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
+    <div className="contact-container">
+      <form onSubmit={handleSubmit} className="contact-form">
         <input
           name="name"
           value={formData.name}
@@ -65,7 +72,7 @@ const ContactForm = () => {
         <button type="submit">Send Message</button>
       </form>
       <ToastContainer position="top-right" autoClose={3000} />
-    </>
+    </div>
   );
 };
 
