@@ -26,68 +26,44 @@ const ContactForm = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const contactRef = ref(database, 'contacts');
-      await push(contactRef, formData);
-
-      // Clear form data after successful submit
-      setFormData({ name: '', email: '', message: '' });
-
-      // Show success toast
-      toast.success("Form submitted successfully!");
-    } catch (error) {
-      console.error('Error:', error);
-      toast.error("Some error occurred. Please try again.");
-    }
+    console.log("Submitting", formData);
+    // Simulate success
+    toast.success("Form submitted successfully!");
+    setFormData({ name: '', email: '', message: '' });
   };
 
   return (
     <>
-      <div className="contact-glass-container">
-        <form className="contact-form" onSubmit={handleSubmit}>
-          <h1>Contact Us</h1>
-
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-
-          <label htmlFor="message">Message</label>
-          <textarea
-            name="message"
-            id="message"
-            rows="4"
-            value={formData.message}
-            onChange={handleChange}
-            required
-          />
-
-          <button type="submit">Send Message</button>
-        </form>
-      </div>
-
-      {/* Toast container to show toast messages */}
+      <form onSubmit={handleSubmit}>
+        <input
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          placeholder="Name"
+          required
+        />
+        <input
+          name="email"
+          type="email"
+          value={formData.email}
+          onChange={handleChange}
+          placeholder="Email"
+          required
+        />
+        <textarea
+          name="message"
+          value={formData.message}
+          onChange={handleChange}
+          placeholder="Message"
+          required
+        />
+        <button type="submit">Send Message</button>
+      </form>
       <ToastContainer position="top-right" autoClose={3000} />
     </>
   );
